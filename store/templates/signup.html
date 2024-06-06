@@ -1,0 +1,39 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+
+
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder"> Login Your Account</h1>
+            <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
+        </div>
+    </div>
+</header>
+
+<br>
+<br>
+
+<div class="row"> 
+        <div class="col-8 m-5">
+            <h2>Login</h2>
+            <form method="POST" action="">
+                
+                {% csrf_token %}
+                {{form|crispy}}
+                <button type="submit" class="btn btn-primary">تسجيل دخول</button>
+            </form>
+           
+
+        </div>
+</div>
+
+
+
+
+
+{% endblock %}

@@ -16,24 +16,23 @@
 <div class="container">
     <div class="row">
         <center>
+            <H2>تسجيل الدخول</H2>
             <div class="col-8">
                 <form method="POST" action="{% url 'login' %}">
                     {% csrf_token %}
-                    <div class="mb-3">
-                      <input type="text"  name="username" class="form-control" placeholder="add your user name">
+                    <div >
+                      <input type="text"  name="username" class="form-control" placeholder="أدخل إسم مستخدم">
                     </div>
                     <br>
-                    <div class="mb-3">
-                      <input type="password" name="password" class="form-control" placeholder="add your password">
+                    <div >
+                      <input type="password" name="password" class="form-control" placeholder="  أدخل كلمة مرور">
                     </div>
                     <div class="mb-3 form-check">
                       <input type="checkbox" class="form-check-input" id="exampleCheck1">
                     </div>
-                    <button type="submit" class="btn btn-primary">login</button>
+                    <button type="submit" class="btn btn-primary">تسجيل دخول</button>
                   </form>
             </div>
-           
-
         </center>
     </div>
 </div>
