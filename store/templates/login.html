@@ -11,5 +11,33 @@
     </div>
 </header>
 
+<br>
+<br>
+<div class="container">
+    <div class="row">
+        <center>
+            <div class="col-8">
+                <form method="POST" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                      <input type="text"  name="username" class="form-control" placeholder="add your user name">
+                    </div>
+                    <br>
+                    <div class="mb-3">
+                      <input type="password" name="password" class="form-control" placeholder="add your password">
+                    </div>
+                    <div class="mb-3 form-check">
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    </div>
+                    <button type="submit" class="btn btn-primary">login</button>
+                  </form>
+            </div>
+           
+
+        </center>
+    </div>
+</div>
+
+
 
 {% endblock %}

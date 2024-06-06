@@ -18,6 +18,14 @@
     <body>
         {% include 'parstail/navbar.html' %}
         {% block content %}
+            {% if messages %}
+            {% for messages in messages %}
+                <div class="alert alert-success" role="alert">
+                    A simple success alert—check it out!{{messages}}
+                </div>
+
+            {% endfor %}
+            {% endif %}
 
         {% endblock %}
 

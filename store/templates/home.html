@@ -2,6 +2,15 @@
 {% load static %}
 {% block content %}
 
+{% if messages %}
+{% for messages in messages %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    login your user name {{messages}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+
+{% endfor %}
+{% endif %}
 
 <header class="bg-dark py-5">
     <div class="container px-4 px-lg-5 my-5">
@@ -11,6 +20,7 @@
         </div>
     </div>
 </header>
+
      
         <!-- Section-->
         <section class="py-5">
