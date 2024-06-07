@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="container mt-4">
+    <div class="card mb-3 ">
+        <div class="row b-5">
+            <div class="col-md-4 " >
+                <img src="{{product.image.url}}" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+                <center>
+                <div class="card-body">
+                <h5 class="card-title">{{product.name}}</h5>
+                <br>
+                <p class="card-text justified">{{product.description}}</p>
+                {% if product.is_sale %}
+                <p class="card-text"><small class="text-body-secondary"><h3>Price</h3>$<strike>{{product.price}}</strike><h4>{{product.sale_price}}</h4></small></p>
+                
+                {% else %}
+                <p>{{product.price}}</p>
+                {% endif %}
+                </div>
+                
+                <a href="{% url 'home' %}" class="btn btn-secondary"> Home </a>
+                </center>
+            </div>
+        </div>
+      </div>
+</div>
+
+
+
+{% endblock %}

@@ -21,12 +21,12 @@
               <div class="border p-4 mb-4">
                 <form method="POST" action="{% url 'login' %}">
                     {% csrf_token %}
-                    <div >
-                      <input type="text"  name="username" class="form-control" placeholder="أدخل إسم مستخدم">
+                    <div>
+                      <input type="text"  name="username" class="form-control" placeholder="username">
                     </div>
                     <br>
-                    <div >
-                      <input type="password" name="password" class="form-control" placeholder="  أدخل كلمة مرور">
+                    <div>
+                      <input type="password" name="password" class="form-control" placeholder="password ">
                     </div>
                     <div class="mb-3 form-check">
                       <input type="checkbox" class="form-check-input" id="exampleCheck1">

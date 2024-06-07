@@ -24,7 +24,7 @@
                 <center>
                 <h2>Login</h2>
                 </center>
-                <form method="POST" action="">
+                <form method="POST" action="{% url 'login' %}">
                     
                     {% csrf_token %}
                     {{form.as_p}}
