@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect
 from . models import *
+from django.contrib.auth.models import User
 from django.contrib.auth import authenticate , login, logout
 from django.contrib import messages
-from .forms import CreateUser
+from django.contrib.auth.forms import UserCreationForm
+from .forms import SignUpForm
+
 
 # Create your views here.
 
@@ -32,10 +35,22 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     messages.success(request,("you have been logged out"))
-    redirect('home')
+    redirect('signup')
 
-def Register(request):
-    form = CreateUser()
-    return render(request, 'signup.html',{
-        'form':form
-    })
+def Register_User(request):
+    form = SignUpForm()
+    if request.method == "POST":
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(username=username, password=password)
+            login(request,user)
+            messages.success(request,('You have regester Successfully  '))
+            return redirect('home')
+        else:
+            messages.success(request, ('problem with regester pls try again...'))
+            return redirect('home')
+    else:
+        return render(request, 'signup.html',{'form':form}) 

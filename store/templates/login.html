@@ -15,9 +15,10 @@
 <br>
 <div class="container">
     <div class="row">
-        <center>
-            <H2>تسجيل الدخول</H2>
-            <div class="col-8">
+           
+            <div class="col-md-6 offset-md-3">
+              <center><H2>تسجيل الدخول</H2></center>
+              <div class="border p-4 mb-4">
                 <form method="POST" action="{% url 'login' %}">
                     {% csrf_token %}
                     <div >
@@ -30,10 +31,12 @@
                     <div class="mb-3 form-check">
                       <input type="checkbox" class="form-check-input" id="exampleCheck1">
                     </div>
+                    <center>
                     <button type="submit" class="btn btn-primary">تسجيل دخول</button>
+                    </center>
                   </form>
+                </div>
             </div>
-        </center>
     </div>
 </div>
 

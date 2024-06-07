@@ -17,21 +17,26 @@
 
 <br>
 <br>
-
-<div class="row"> 
-        <div class="col-8 m-5">
-            <h2>Login</h2>
-            <form method="POST" action="">
-                
-                {% csrf_token %}
-                {{form|crispy}}
-                <button type="submit" class="btn btn-primary">تسجيل دخول</button>
-            </form>
-           
-
+<div class="container">
+    <div class="row"> 
+        <div class="col-md-6 offset-md-3 ">
+            <div class="border p-4 mb-4">
+                <center>
+                <h2>Login</h2>
+                </center>
+                <form method="POST" action="">
+                    
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <center>
+                    <button type="submit" class="btn btn-primary">تسجيل دخول</button>
+                    </center>
+                </form>
+            </div>
         </div>
+       
+    </div>
 </div>
-
 
 
 
