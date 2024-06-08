@@ -8,6 +8,14 @@ from .forms import SignUpForm
 
 
 # Create your views here.
+def category(request,foo):
+    try:
+        category = Category.objects.get(name=foo)
+        products = Product.objects.filter(category=category)
+        return render(request, 'category.html',{'products':products,'category':category })
+    except:
+        messages.success(request,('category try again'))
+        return redirect('home')
 
 def product(request, pk):
     product = Product.objects.get(id=pk)
