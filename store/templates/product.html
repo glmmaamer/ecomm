@@ -38,11 +38,11 @@
         e.preventDefault();
         $.ajax({
             type: 'POST',
-            url: "{% url 'add_cart' %}",  
+            url: "{% url 'cart_add' %}",  
             data:{
                 product_id:$('#add-cart').val(),
                 csrfmiddlewaretoken:'{{csrf_token}}',
-                action:'post'
+                action:'post',
             },  
             success: function(json){
                 console.log(json)
