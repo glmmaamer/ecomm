@@ -20,16 +20,38 @@
                 
                 {% else %}
                 <p>{{product.price}}</p>
+                {{product.id}}
                 {% endif %}
                 </div>
                 
-                <a href="{% url 'home' %}" class="btn btn-secondary"> Home </a>
+                <a href="{% url 'home' %}" class="btn btn-secondary mb-4"> Home </a>
+                <button class="btn btn-secondary mb-4" value="{{product.id}}" id="add-cart">Add To Cart</button>
                 </center>
             </div>
         </div>
       </div>
 </div>
 
-
+<script>
+    // check if button prassed
+    $(document).on('click','#add-cart',function(e){
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'add_cart' %}",  
+            data:{
+                product_id:$('#add-cart').val(),
+                csrfmiddlewaretoken:'{{csrf_token}}',
+                action:'post'
+            },  
+            success: function(json){
+                console.log(json)
+            },
+            error:function(xhr, errmsg, err){
+                
+            }
+         });
+    });
+</script>
 
 {% endblock %}
