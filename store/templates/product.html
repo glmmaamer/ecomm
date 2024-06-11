@@ -20,13 +20,24 @@
                 
                 {% else %}
                 <p>{{product.price}}</p>
-                {{product.id}}
                 {% endif %}
+                <div class="row justify-content-center">
+                    <div class="col-md-2">Quantity</div>
+                    <div class="col-md-2">
+                        <select class="form-select mb-4"  aria-label="Default select example"
+                        id="qty-cart">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
                 </div>
-                
-                <a href="{% url 'home' %}" class="btn btn-secondary mb-4"> Home </a>
-                <button class="btn btn-secondary mb-4" value="{{product.id}}" id="add-cart">Add To Cart</button>
+                <a href="{% url 'home' %}" class="btn btn-secondary "> Home </a>
+                <button class="btn btn-secondary " value="{{product.id}}" id="add-cart">Add To Cart</button>
                 </center>
+                </div>
+
             </div>
         </div>
       </div>
@@ -41,6 +52,7 @@
             url: "{% url 'cart_add' %}",  
             data:{
                 product_id:$('#add-cart').val(),
+                product_qty:$('#qty-cart option:selected').text(),
                 csrfmiddlewaretoken:'{{csrf_token}}',
                 action:'post',
             },  
@@ -55,6 +67,6 @@
             }
          });
     });
-</script>
+</script> 
 
 {% endblock %}
