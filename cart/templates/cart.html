@@ -36,7 +36,7 @@
                     <div class="col-md-2">Quantity</div>
                     <div class="col-md-2">
                         <select class="form-select mb-4"  aria-label="Default select example"
-                        id="qty-cart">
+                        id="select{{product.id}}">
                         {% for key, value in quantites.items %}
                             {% if key == product.id|slugify %}
                                <option selected> {{ value }} </option> 
@@ -50,6 +50,8 @@
                     </div>
                 </div>
                 <a href="{% url 'home' %}" class="btn btn-secondary mb-4"> Home </a>
+                <button type="button" data-index="{{product.id}}" class="btn btn-secondary update-cart mb-4" >update</button>
+
                 </div>
                 </center>
             </div>
@@ -61,3 +63,28 @@
      
      
 {% endblock %}
+<script>
+    $(document).on('click','.update-cart',function(e){
+        e.preventDefault();
+        var productid = $(this).data('index');
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'update' %}",  
+            data:{
+                product_id:$(this).data('index'),
+                product_qty:$('#select'+productid +'option:selected').text(),
+                csrfmiddlewaretoken:'{{csrf_token}}',
+                action:'post',
+            },  
+            success: function(json){
+                //console.log(json)
+                document.getElementById('cart_quantity').
+                    textContent = json.qty
+                
+            },
+            error:function(xhr, errmsg, err){
+                
+            }
+         });
+    });
+</script>
