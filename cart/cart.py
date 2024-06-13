@@ -42,6 +42,12 @@ class Cart():
         self.session.modified = True
         update_cart_quantity = self.cart
         return update_cart_quantity
+    
+    def delet(self, product):
+        product_id = str(product)
+        if product_id in self.cart:
+            del self.cart[product_id]
 
+        self.session.modified = True
         
     

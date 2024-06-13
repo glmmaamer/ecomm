@@ -39,4 +39,10 @@ def update_cart(request):
         #return redirect('summary')
 
 def delete(request):
-    pass
+    cart = Cart(request)
+    if request.POST.get('action') == 'post':
+        product_id = int(request.POST.get('product_id'))
+        cart.delet(product=product_id)
+
+        respons = JsonResponse({'porduct':product_id})
+        return respons
