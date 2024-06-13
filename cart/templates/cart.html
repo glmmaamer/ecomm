@@ -33,7 +33,7 @@
                 <p>{{product.price}}</p>
                 {% endif %}
                 <div class="row justify-content-center">
-                    <div class="col-md-2">Quantity</div>
+                    <div class="col-md-2">العدد</div>
                     <div class="col-md-2">
                         <select class="form-select mb-4"  aria-label="Default select example"
                         id="select{{product.id}}">
@@ -49,8 +49,13 @@
                           </select>
                     </div>
                 </div>
-                <a href="{% url 'home' %}" class="btn btn-secondary mb-4"> Home </a>
-                <button type="button" data-index="{{product.id}}" class="btn btn-secondary update-cart" >update</button>
+                <a href="{% url 'home' %}" class="btn btn-secondary mb-4"> الرئيسية </a>
+                <button type="button" data-index="{{product.id}}" class="btn btn-secondary update-cart mb-4" >
+                    تحديث
+                </button>
+                <button type="button" data-index="{{product.id}}" class="btn btn-danger delet-cart mb-4" >
+                    حذف
+                </button>
 
                 </div>
                 </center>
@@ -68,7 +73,7 @@
         var productid = $(this).data('index');
         $.ajax({
             type: 'POST',
-            url: "{% url 'update' %}",  
+            url: "{% url 'update_cart' %}",  
             data:{
                 product_id:$(this).data('index'),
                 product_qty:$('#select' + productid +' option:selected').text(),
@@ -79,7 +84,6 @@
                 //console.log(json)
                 document.getElementById('cart_quantity').
                     textContent = json.qty
-                
             },
             error:function(xhr, errmsg, err){
                 
