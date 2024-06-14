@@ -7,61 +7,63 @@
 <header class="bg-dark py-5">
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">cart </h1>
-            <p class="lead fw-normal text-white-50 mb-0">cart shop</p>
+            <h1 class="display-4 fw-bolder">سلة التسوق </h1>
+            <p class="lead fw-normal text-white-50 mb-0">سلة المنتوجات التي قمت بإختيارها </p>
         </div>
     </div>
 </header>
 <br><br>
 <div class="container">
     {% for product in cart_products %}
-    <div class="card mb-3 ">
+    <div class="card m-2 ">
         <div class="row b-5">
-            <div class="col-md-4 " >
-                <img src="{{product.image.url}}" class="img-fluid rounded-start" alt="...">
+            <div class="col-md-3 m-4 " >
+                <img src="{{product.image.url}}" class="img-fluid rounded-start" alt="..." width="120px" height="120px">
             </div>
-            <div class="col-md-8">
-                <center>
-                <div class="card-body">
-                <h5 class="card-title">{{product.name}}</h5>
-                <br>
-                <p class="card-text justified">{{product.description}}</p>
+            <div class="col-md-2 mt-4">
+                <h4>الاسم</h4>
+                <h6 class="card-title">{{product.name}}</h6>
+            </div>
+            <div class="col-md-2 mt-4">
+                <h4>سعر</h4>
                 {% if product.is_sale %}
                 <p class="card-text"><small class="text-body-secondary"><h3>Price</h3>$<strike>{{product.price}}</strike><h4>{{product.sale_price}}</h4></small></p>
                 
                 {% else %}
                 <p>{{product.price}}</p>
                 {% endif %}
-                <div class="row justify-content-center">
-                    <div class="col-md-2">العدد</div>
-                    <div class="col-md-2">
-                        <select class="form-select mb-4"  aria-label="Default select example"
-                        id="select{{product.id}}">
-                        {% for key, value in quantites.items %}
-                            {% if key == product.id|slugify %}
-                               <option selected> {{ value }} </option> 
-                            {% endif %}
-                        {% endfor %}
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                          </select>
-                    </div>
+            </div>
+            <div class="col-md-2 mt-4">
+            
+                <h4>العدد</h4>
+                <div class="col-md-4">
+                    <select class="form-select mb-4"  aria-label="Default select example"
+                    id="select{{product.id}}">
+                    {% for key, value in quantites.items %}
+                        {% if key == product.id|slugify %}
+                            <option selected> {{ value }} </option> 
+                        {% endif %}
+                    {% endfor %}
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        </select>
                 </div>
-                <a href="{% url 'home' %}" class="btn btn-secondary mb-4"> الرئيسية </a>
-                <button type="button" data-index="{{product.id}}" class="btn btn-secondary update-cart mb-4" >
+            </div>
+            <center>
+            <div class="col-md-6 m-4">  
+                <a href="{% url 'home' %}" class="btn btn-secondary m-4"> الرئيسية </a>
+                <button type="button" data-index="{{product.id}}" class="btn btn-secondary update-cart m-4" >
                     تحديث
                 </button>
-                <button type="button" data-index="{{product.id}}" class="btn btn-danger delet-product mb-4" >
+                <button type="button" data-index="{{product.id}}" class="btn btn-danger delet-product m-4" >
                     حذف
                 </button>
-
-                </div>
-                </center>
             </div>
+            </center>
         </div>
-      </div>
+    </div>
       {% endfor %}
 </div>
 
@@ -87,7 +89,6 @@
                     textContent = json.qty
             },
             error:function(xhr, errmsg, err){
-                
             }
          });
     });

@@ -16,10 +16,10 @@
                 <br>
                 <p class="card-text justified">{{product.description}}</p>
                 {% if product.is_sale %}
-                <p class="card-text"><small class="text-body-secondary"><h3>Price</h3>$<strike>{{product.price}}</strike><h4>{{product.sale_price}}</h4></small></p>
+                <p class="card-text"><small class="text-body-secondary"><h3></h3>$<strike>{{product.price}}</strike><h4>${{product.sale_price}}</h4></small></p>
                 
                 {% else %}
-                <p>{{product.price}}</p>
+                <p><strike>$</strike> {{product.price}}</p>
                 {% endif %}
                 <div class="row justify-content-center">
                     <div class="col-md-2">العدد</div>
