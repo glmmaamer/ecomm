@@ -2,6 +2,15 @@
 {% load static %}
 {% block content %}
 
+{% if messages %}
+{% for messages in messages %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    {{messages}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+
+{% endfor %}
+{% endif %}
 
 <div class="container mt-4">
     <div class="card mb-3 ">
