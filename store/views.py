@@ -7,7 +7,13 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm
 
 
+
 # Create your views here.
+def category_all(request):
+    all_category = Category.objects.all()
+    return render(request, 'category_all.html',{"all_category":all_category})
+
+
 def category(request,foo):
     try:
         category = Category.objects.get(name=foo)

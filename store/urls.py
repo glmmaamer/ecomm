@@ -9,4 +9,5 @@ urlpatterns = [
     path('signup/',views.Register_User, name='signup'),
     path('product/<int:pk>/',views.product, name='product'),
     path('category/<str:foo>',views.category, name='category'),
+    path('catgery_all/',views.category_all, name='category_all')
 ]

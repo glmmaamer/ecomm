@@ -13,8 +13,7 @@ def summary(request):
     
     return render(request, 'cart.html',{'cart_products':cart_products,
                                         'quantites': quantites,
-                                        'totales':total,
-                                        })
+                                        'totales':total})
 
 def cart_add(request):
     cart = Cart(request)
