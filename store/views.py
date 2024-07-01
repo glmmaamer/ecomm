@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate , login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
-from .forms import SignUpForm
+from .forms import SignUpForm, UpdateUserForm
 
 
 
@@ -34,8 +34,7 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
-def update_user(request):
-    return render(request,'update_user.html')
+
 
 def login_user(request):
     if request.method == "POST":
@@ -55,7 +54,7 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     messages.success(request,("you have been logged out"))
-    redirect('home')
+    redirect('signup')
 
 def Register_User(request):
     form = SignUpForm()
@@ -74,3 +73,17 @@ def Register_User(request):
             return redirect('home')
     else:
         return render(request, 'signup.html',{'form':form}) 
+    
+def update_user(request):
+    if request.user.is_authenticated:
+        currant_user = User.objects.get(id=request.user.id)
+        user_form = UpdateUserForm(request.POST or None, instance=currant_user)
+        if user_form.is_valid():
+            user_form.save()
+            login(request, currant_user)
+            messages.success(request,('تم تحديث ملفك الشخصي'))
+            return redirect('home')
+        return render(request, 'update_user.html')
+    else:
+        messages.success(request, ('لم يتم تحديث ملفك الشخصي هناك خطأ'))
+        return redirect('home')

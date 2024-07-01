@@ -24,10 +24,11 @@
                 <center>
                 <h2>ملف الشخصي</h2>
                 </center>
-                <form method="POST" action="{% url 'login' %}">
+                <form method="POST" action="{% url 'update_user' %}">
                     
                     {% csrf_token %}
-                    {{form.as_p}}
+
+                    {{ user_form.as_p }}
                     <center>
                     <button type="submit" class="btn btn-primary">تعديل </button>
                     </center>
