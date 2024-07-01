@@ -2,7 +2,15 @@
 {% load static %}
 {% block content %}
 
+{% if messages %}
+{% for messages in messages %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    {{messages}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
 
+{% endfor %}
+{% endif %}
 
 <header class="bg-dark py-5">
     <div class="container px-4 px-lg-5 my-5">
@@ -108,7 +116,7 @@
             },
             success: function(json){
                 //console.log(json)
-               // document.getElementById('cart_quantity').
+               // document.getElementById('cart_quantity').f
                     location.reload();
             },
             error:function(xhr, errmsg, err){

@@ -39,6 +39,7 @@ def update_cart(request):
         product_qty = int(request.POST.get('product_qty'))
         cart.update(product=product_id, quantity=product_qty)
         response = JsonResponse({'qty':product_qty})
+        messages.success(request,('تم تحديث الصفحة'))
         return response
         #return redirect('summary')
 
@@ -49,4 +50,5 @@ def delete(request):
         cart.delet(product=product_id)
 
         respons = JsonResponse({'porduct':product_id})
+        messages.success(request,('تم حذف المنتج من سلة الشراء'))
         return respons

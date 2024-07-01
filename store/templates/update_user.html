@@ -1,0 +1,44 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+
+
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder"> ملف الشخصي</h1>
+            <p class="lead fw-normal text-white-50 mb-0">تعديل ملفك الشخصي</p>
+        </div>
+    </div>
+</header>
+
+<br>
+<br>
+<div class="container">
+    <div class="row"> 
+        <div class="col-md-6 offset-md-3 ">
+            <div class="border p-4 mb-4">
+                <center>
+                <h2>ملف الشخصي</h2>
+                </center>
+                <form method="POST" action="{% url 'login' %}">
+                    
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <center>
+                    <button type="submit" class="btn btn-primary">تعديل </button>
+                    </center>
+                </form>
+            </div>
+        </div>
+       
+    </div>
+</div>
+
+
+
+
+{% endblock %}
