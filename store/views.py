@@ -7,6 +7,20 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm, UpdateUserForm
 
 
+def update_user(request):
+    if request.user.is_authenticated:
+        current_user = User.objects.get(id=request.user.id)
+        user_form = UpdateUserForm(request.POST or None, instance=current_user)
+        if user_form.is_valid():
+            user_form.save()
+            login(request, current_user)
+            messages.success(request,('تم تحديث ملفك الشخصي'))
+            return redirect('home')
+        return render(request, 'update_user.html')
+    else:
+        messages.success(request, ('لم يتم تحديث ملفك الشخصي هناك خطأ'))
+        return redirect('home')
+
 
 # Create your views here.
 def category_all(request):
@@ -74,16 +88,3 @@ def Register_User(request):
     else:
         return render(request, 'signup.html',{'form':form}) 
     
-def update_user(request):
-    if request.user.is_authenticated:
-        currant_user = User.objects.get(id=request.user.id)
-        user_form = UpdateUserForm(request.POST or None, instance=currant_user)
-        if user_form.is_valid():
-            user_form.save()
-            login(request, currant_user)
-            messages.success(request,('تم تحديث ملفك الشخصي'))
-            return redirect('home')
-        return render(request, 'update_user.html')
-    else:
-        messages.success(request, ('لم يتم تحديث ملفك الشخصي هناك خطأ'))
-        return redirect('home')
