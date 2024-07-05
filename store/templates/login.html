@@ -10,6 +10,15 @@
         </div>
     </div>
 </header>
+{% if messages %}
+{% for messages in messages %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    {{messages}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+
+{% endfor %}
+{% endif %}
 
 <br>
 <br>
@@ -26,7 +35,7 @@
                     </div>
                     <br>
                     <div>
-                      <input type="password" name="password" class="form-control" placeholder="password ">
+                      <input type="password" name="password1" class="form-control" placeholder="password">
                     </div>
                     <div class="mb-3 form-check">
                       <input type="checkbox" class="form-check-input" id="exampleCheck1">

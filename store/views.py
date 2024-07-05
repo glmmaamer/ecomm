@@ -10,13 +10,14 @@ from .forms import SignUpForm, UpdateUserForm
 def update_user(request):
     if request.user.is_authenticated:
         current_user = User.objects.get(id=request.user.id)
-        user_form = UpdateUserForm(request.POST or None, instance=current_user)
-        if user_form.is_valid():
-            user_form.save()
+        form_update = UpdateUserForm(request.POST or None, instance=current_user)
+        if form_update.is_valid():
+            form_update.save()
+
             login(request, current_user)
             messages.success(request,('تم تحديث ملفك الشخصي'))
             return redirect('home')
-        return render(request, 'update_user.html')
+        return render(request, 'update_user.html', {'form_update':form_update})
     else:
         messages.success(request, ('لم يتم تحديث ملفك الشخصي هناك خطأ'))
         return redirect('home')
@@ -48,28 +49,6 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
-
-
-def login_user(request):
-    if request.method == "POST":
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            messages.success(request, ("login for your user admin "))
-            return redirect('home')
-        else:
-            messages.success(request,("error plz try egain"))
-            return redirect('login')
-    else:
-        return render(request, 'login.html')
-
-def logout_user(request):
-    logout(request)
-    messages.success(request,("you have been logged out"))
-    redirect('signup')
-
 def Register_User(request):
     form = SignUpForm()
     if request.method == "POST":
@@ -88,3 +67,25 @@ def Register_User(request):
     else:
         return render(request, 'signup.html',{'form':form}) 
     
+
+def login_user(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password1']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            messages.success(request, ("تم تسجيل دخول "))
+            return redirect('home')
+        else:
+            messages.success(request,("هناك خطأ في تسجيل الدخول يرجى إعادة المحاولة"))
+            return redirect('login')
+    else:
+        return render(request, 'login.html')
+
+
+def logout_user(request):
+    logout(request)
+    messages.success(request,("تم تسجيل الخروج "))
+    redirect('login')
+
