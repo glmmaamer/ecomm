@@ -24,7 +24,7 @@
                 <center>
                 <h2>إنشاء حساب</h2>
                 </center>
-                <form method="POST" action="{% url 'login' %}">
+                <form method="POST" action="{% url 'signup' %}">
                     
                     {% csrf_token %}
                     {{form.as_p}}
