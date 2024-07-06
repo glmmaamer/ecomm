@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate , login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
-from .forms import SignUpForm, UpdateUserForm
+from .forms import SignUpForm, UpdateUserForm, UpdatePasswordFrom
 
 # Create your views here.
 def category_all(request):
@@ -69,21 +69,42 @@ def login_user(request):
 def update_user(request):
     if request.user.is_authenticated:
         current_user = User.objects.get(id=request.user.id)
-        form_update = UpdateUserForm(request.POST or None, instance=current_user)
-        if form_update.is_valid():
-            form_update.save()
+        update_form = UpdateUserForm(request.POST or None, instance=current_user)
+        if update_form.is_valid():
+            update_form.save()
 
             login(request, current_user)
             messages.success(request,('تم تحديث ملفك الشخصي'))
             return redirect('home')
-        return render(request, 'update_user.html', {'form_update':form_update})
+        return render(request, 'update_user.html', {'update_form':update_form})
     else:
         messages.success(request, ('لم يتم تحديث ملفك الشخصي هناك خطأ'))
+        return redirect('home')
+
+def update_password(request):
+    if request.user.is_authenticated:
+        current_user = request.user
+        if request.method == 'POST':
+            form = UpdatePasswordFrom(current_user,request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, ('تم تحديث كلمة السر'))
+                #login(request,current_user)
+                return redirect('login')
+            else:
+                for error in list(form.errors.values()):
+                    messages.error(request, error)
+                    return redirect('update_password')
+        else:
+            form = UpdatePasswordFrom(current_user)
+            return render(request, 'update_password.html',{'form':form})
+    else:
+        messages.success(request, ('لم يتم تحديث كلمة السر'))
         return redirect('home')
 
 
 def logout_user(request):
     logout(request)
     messages.success(request,("تم تسجيل الخروج "))
-    redirect('login')
+    return redirect('login')
 
