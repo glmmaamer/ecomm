@@ -32,6 +32,7 @@ def cart_add(request):
         return response
     
 
+
 def update_cart(request):
     cart = Cart(request)
     if request.POST.get('action') == 'post':
