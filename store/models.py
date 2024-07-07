@@ -12,6 +12,7 @@ class Profile(models.Model):
     city = models.CharField(max_length=200, blank=True)
     state = models.CharField(max_length=200, blank=True)
     zipcode = models.CharField(max_length=15, blank=True)
+    country = models.CharField(max_length=40, blank=True)
 
     def __str__(self):
         return self.user.username
@@ -21,7 +22,7 @@ def create_profile(sender, instance, created, **kwargs):
         user_profile = Profile(user=instance)
         user_profile.save()
 
-post_save.connect(create_profile, sender=User)
+post_save.connect(create_profile,sender=User)
 
 
 # Create your models here.

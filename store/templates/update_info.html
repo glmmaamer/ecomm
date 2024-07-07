@@ -1,0 +1,47 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+
+
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder"> تعديل بيانات  </h1>
+            <p class="lead fw-normal text-white-50 mb-0">  إضافة و تعديل بياناتك  </p>
+        </div>
+    </div>
+</header>
+
+<br>
+<br>
+<div class="container">
+    <div class="row"> 
+        <div class="col-md-6 offset-md-3 ">
+            <div class="border p-4 mb-4">
+                <center>
+                <h2>تعديل كلمة السر</h2>
+                </center>
+                <form method="POST" action="{% url 'update_info' %}">
+                    
+                    {% csrf_token %}
+
+                    {{ form.as_p }}
+                    <br><br>
+                    <center>
+                    <button type="submit" class="btn btn-primary">تعديل وإضافة بياناتك الخاصة </button>
+                    </center>
+                
+                </form>
+            </div>
+        </div>
+       
+    </div>
+</div>
+
+
+
+
+{% endblock %}

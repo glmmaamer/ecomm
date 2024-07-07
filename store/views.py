@@ -66,6 +66,11 @@ def login_user(request):
     else:
         return render(request, 'login.html')
     
+    
+def update_info(request):
+    return render(request, 'update_info.html')
+    
+
 def update_user(request):
     if request.user.is_authenticated:
         current_user = User.objects.get(id=request.user.id)
