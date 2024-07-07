@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
-from . models import *
+from .models import Profile, Product, Category
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate , login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
-from .forms import SignUpForm, UpdateUserForm, UpdatePasswordFrom
+from .forms import SignUpForm, UpdateUserForm, UpdatePasswordFrom, UserInfoForm
 
 # Create your views here.
 def category_all(request):
@@ -43,7 +43,7 @@ def Register_User(request):
             user = authenticate(username=username, password=password)
             login(request,user)
             messages.success(request,('تم إنشاء حساب بنجاح  '))
-            return redirect('home')
+            return redirect('update_info')
         else:
             messages.success(request, ('هناك خطأ ما يرجى إعادة المحاولة'))
             return redirect('home')
@@ -66,10 +66,19 @@ def login_user(request):
     else:
         return render(request, 'login.html')
     
-    
+
 def update_info(request):
-    return render(request, 'update_info.html')
-    
+    if request.user.is_authenticated:
+        current_info = Profile.objects.get(user__id=request.user.id)
+        form = UserInfoForm(request.POST or None, instance=current_info)
+        if form.is_valid():
+            form.save()
+            messages.success(request, ('تمت إضافة و تعديل جميع بياناتك '))
+            return redirect('home')
+        return render(request, 'update_info.html',{'form':form})
+    else:
+        messages.success(request, ('هناك خطأفي أضافة أو تعديل بيانات توصيل عند الشراء يرجى إعادة المحاولة'))
+        return redirect('home')
 
 def update_user(request):
     if request.user.is_authenticated:
@@ -90,19 +99,19 @@ def update_password(request):
     if request.user.is_authenticated:
         current_user = request.user
         if request.method == 'POST':
-            form = UpdatePasswordFrom(current_user,request.POST)
-            if form.is_valid():
-                form.save()
+            pass_form = UpdatePasswordFrom(current_user,request.POST)
+            if pass_form.is_valid():
+                pass_form.save()
                 messages.success(request, ('تم تحديث كلمة السر'))
                 #login(request,current_user)
                 return redirect('login')
             else:
-                for error in list(form.errors.values()):
+                for error in list(pass_form.errors.values()):
                     messages.error(request, error)
                     return redirect('update_password')
         else:
-            form = UpdatePasswordFrom(current_user)
-            return render(request, 'update_password.html',{'form':form})
+            pass_form= UpdatePasswordFrom(current_user)
+            return render(request, 'update_password.html',{'pass_form':pass_form})
     else:
         messages.success(request, ('لم يتم تحديث كلمة السر'))
         return redirect('home')

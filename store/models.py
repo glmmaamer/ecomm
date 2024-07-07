@@ -7,8 +7,8 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     date_modified = models.DateTimeField(User, auto_now=True)
     phone = models.CharField(max_length=20, blank=True)
-    address_1 = models.CharField(max_length=200, blank=True)
-    address_2 = models.CharField(max_length=200, blank=True)
+    address1 = models.CharField(max_length=200, blank=True)
+    address2 = models.CharField(max_length=200, blank=True)
     city = models.CharField(max_length=200, blank=True)
     state = models.CharField(max_length=200, blank=True)
     zipcode = models.CharField(max_length=15, blank=True)
@@ -22,7 +22,7 @@ def create_profile(sender, instance, created, **kwargs):
         user_profile = Profile(user=instance)
         user_profile.save()
 
-post_save.connect(create_profile,sender=User)
+post_save.connect(create_profile, sender=User)
 
 
 # Create your models here.
