@@ -29,7 +29,7 @@ def product(request, pk):
 def search(request):
     if request.method == 'POST':
         searched = request.POST['searched']
-        searched = Product.objects.filter=( Q(name__icontains=searched) | Q(description__icontains=searched))
+        searched = Product.objects.filter(Q(name__icontains=searched) | Q(description__icontains=searched))
         if not searched:
             messages.success(request, ('منتج غير موجود'))
             return render(request,'search.html')
