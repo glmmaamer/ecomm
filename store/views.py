@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate , login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm, UpdateUserForm, UpdatePasswordFrom, UserInfoForm
+from django.db.models import Q
 
 # Create your views here.
 def category_all(request):
@@ -28,8 +29,12 @@ def product(request, pk):
 def search(request):
     if request.method == 'POST':
         searched = request.POST['searched']
-        searched = Product.objects.filter(name__icontains=searched)
-        return render(request, 'search.html',{'searched':searched})
+        searched = Product.objects.filter=( Q(name__icontains=searched) | Q(description__icontains=searched))
+        if not searched:
+            messages.success(request, ('منتج غير موجود'))
+            return render(request,'search.html')
+        else:
+            return render(request, 'search.html',{'searched':searched})
 
     else:
         return render(request, 'search.html')
