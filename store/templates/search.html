@@ -1,0 +1,58 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+
+
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder"> كلمة السر</h1>
+            <p class="lead fw-normal text-white-50 mb-0">تعديل كلمة السر  </p>
+        </div>
+    </div>
+</header>
+
+<br>
+<br>
+<div class="container">
+    <div class="row"> 
+        <div class="col-md-6 offset-md-3 ">
+            <div class="border p-4 mb-4">
+                <center>
+                <h2> بحث عن المنتجات </h2>
+                </center>
+                <form method="POST" action="{% url 'search' %}">
+                    
+                    {% csrf_token %}
+                    <div class="mb3">
+                        <input type="text" class="form-control" placeholder="search" name="searched">
+                    </div>
+
+                    <br><br>
+                    <center>
+                    <button type="submit" class="btn btn-primary"> البحث   </button>
+                    </center>
+                </form>
+            </div>
+        </div>
+       
+    </div>
+</div>
+ <br><br>
+<center>
+{% for search in searched %}
+
+    {{search.name}} <br>
+
+{% endfor %}
+</center>
+
+<br><br><br><br>
+
+
+
+
+{% endblock %}

@@ -25,6 +25,15 @@ def product(request, pk):
     product = Product.objects.get(id=pk)
     return render(request, 'product.html',{'product':product})
 
+def search(request):
+    if request.method == 'POST':
+        searched = request.POST['searched']
+        searched = Product.objects.filter(name__icontains=searched)
+        return render(request, 'search.html',{'searched':searched})
+
+    else:
+        return render(request, 'search.html')
+
 def home(request):
     product = Product.objects.all()
     return render(request, 'home.html',{'product':product})
@@ -45,7 +54,7 @@ def Register_User(request):
             messages.success(request,('تم إنشاء حساب بنجاح  '))
             return redirect('update_info')
         else:
-            messages.success(request, ('هناك خطأ ما يرجى إعادة المحاولة'))
+            messages.success(request, ('لم يتم إنشاء حساب يرجى إعادة المحاولة'))
             return redirect('home')
     else:
         return render(request, 'signup.html',{'form':form}) 
@@ -86,7 +95,6 @@ def update_user(request):
         update_form = UpdateUserForm(request.POST or None, instance=current_user)
         if update_form.is_valid():
             update_form.save()
-
             login(request, current_user)
             messages.success(request,('تم تحديث ملفك الشخصي'))
             return redirect('home')

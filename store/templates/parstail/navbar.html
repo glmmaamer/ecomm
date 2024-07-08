@@ -13,9 +13,9 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">ملف الشخصي</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{% url 'update_info' %}"> كل بياناتك </a></li>
+                            <li><a class="dropdown-item" href="{% url 'update_info' %}"> بيانات توصيل </a></li>
                             <li><hr class="dropdown-divider" /></li>
-                            <li><a class="dropdown-item" href="{% url 'update_user' %}">بيانات الهامة </a></li>
+                            <li><a class="dropdown-item" href="{% url 'update_user' %}">بياناتك شخصية </a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -28,6 +28,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'signup' %}">إنشاء حساب</a>
                     </li>
+                   
 
                     {% endif %}
                     <li class="nav-item dropdown">
@@ -39,7 +40,11 @@
                             <li><a class="dropdown-item" href="{% url 'category' 'bags' %}">حقائب</a></li>
                         </ul>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'search' %}"> بحث</a>
+                    </li>
                 </ul>
+               
                 
                 <form class="d-flex">
                     <a type="submit" class="btn btn-outline-dark" href="{% url 'summary' %}">
