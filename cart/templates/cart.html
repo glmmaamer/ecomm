@@ -88,15 +88,16 @@
             type: 'POST',
             url: "{% url 'update_cart' %}",  
             data:{
-                product_id:$(this).data('index'),
-                product_qty:$('#select' + productid +' option:selected').text(),
-                csrfmiddlewaretoken:'{{csrf_token}}',
-                action:'post',
+        product_id:$(this).data('index'),
+        product_qty:$('#select' + productid +' option:selected').text(),
+        csrfmiddlewaretoken:'{{csrf_token}}',
+        action:'post',
             },
             success: function(json){
                 //console.log(json)
-                document.getElementById('cart_quantity').
-                    textContent = json.qty
+               // document.getElementById('cart_quantity').
+                   // textContent = json.qty
+                   location.reload()
             },
             error:function(xhr, errmsg, err){
             }

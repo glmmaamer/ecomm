@@ -6,7 +6,8 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm, UpdateUserForm, UpdatePasswordFrom, UserInfoForm
 from django.db.models import Q
-
+import json
+from cart.cart import Cart
 # Create your views here.
 def category_all(request):
     all_category = Category.objects.all()
@@ -72,6 +73,14 @@ def login_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
+            current_user = Profile.objects.get(user__id=request.user.id)
+            saved_cart = current_user.cart_old
+            if saved_cart:
+                convarted_cart = json.loads(saved_cart)
+                cart = Cart(request)
+                for key,value in convarted_cart.items():
+                    cart.db_add(product=key, quantity=value)
+
             messages.success(request, ("تم تسجيل دخول "))
             return redirect('home')
         else:
