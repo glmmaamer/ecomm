@@ -73,8 +73,20 @@
         </div>
     </div>
       {% endfor %}
+      <div>
 
-      <h1>total:{{totales}}</h1>
+      </div>
+      <br><br>
+      <center>
+      <div>
+        <h3>
+           <h3> المجموع{{totales}}</h3> 
+        </h3>
+        <a href="{% url 'checkout' %}" class="btn btn-success">     دفع     </a>
+      </div>
+      </center>
+      <br><br>
+      
 </div>
 
      
