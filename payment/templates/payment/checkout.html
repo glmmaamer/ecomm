@@ -5,7 +5,7 @@
 <header class="bg-dark py-5">
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder"> معلومات الدفع و التوصيل  </h1>
+            <h1 class="display-4 fw-bolder">   فاتورة الدفع   </h1>
             <p class="lead fw-normal text-white-50 mb-0">   إضافة معلومات توصيل  و دفع</p>
         </div>
     </div>
@@ -38,22 +38,29 @@
                             {{ stuff_product.name}}
                             
                             {% if stuff_product.is_sale %}
-                                {{stuff_product.sale_price}}
+                                {{stuff_product.sale_price}}$
                             {% else %}
-                                {{ stuff_product.price}}
+                                {{ stuff_product.price}}$
                             {% endif %}
 
-                            Quantity:
+                            <br>
+                            <small>العدد
                             {% for key,value in cart_quantity.items %}
                                 {% if key ==  stuff_product.id|slugify%}
                                     {{value}}
                                 {% endif %}
                             {% endfor %}
+                            </small>
                             <br>
                         {% endfor %}
 
-                        <h3>المجموع</h3>
-                        {{cart_total}}
+                        <strong>المجموع السعر
+                        ${{cart_total}}
+                        </strong>
+                        <br><br>
+                        <a href="{% url 'summary' %}" class="btn btn-outline-secondary">تحديث</a>
+
+
                         </center>
                     </div>
                 </div>
