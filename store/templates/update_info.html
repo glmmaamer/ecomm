@@ -22,13 +22,18 @@
         <div class="col-md-6 offset-md-3 ">
             <div class="border p-4 mb-4">
                 <center>
-                <h2>إضافة  جميع بيانات توصيل عند الشراء</h2>
+                <h2>  معلومات الفواتير </h2>
                 </center>
                 <form method="POST" action="{% url 'update_info' %}">
                     
                     {% csrf_token %}
 
                     {{ form.as_p }}
+                    <br><br>
+                    <center><h2>معلومات الشحن</h2></center> 
+                    <br><br>
+                    {{shipping_form.as_p}}
+                    
                     <br><br>
                     <center>
                     <button type="submit" class="btn btn-primary">تعديل أوإضافة بيانات توصيل عند شراء  </button>
