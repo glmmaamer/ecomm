@@ -60,11 +60,19 @@
                         <br><br>
                         <a href="{% url 'summary' %}" class="btn btn-outline-secondary">تحديث</a>
 
-
                         </center>
                     </div>
                 </div>
-
+                <br><br><br>
+                <div class="card">
+                    <div class="card-header">
+                      <strong>معلومات الشحن</strong>
+                    </div>
+                    <div class="card-body">
+                        {{ shipping_form.as_p }}
+                  
+                    </div>
+                  </div>
            </div>  
     </div>
 </div>
