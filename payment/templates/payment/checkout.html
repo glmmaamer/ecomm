@@ -24,10 +24,44 @@
 <br>
 <div class="container">
     <div class="row">
-           
-       
+           <div class="col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-header">
+                        <center>
+                            <h3>ملخص الطلب</h3>
+                        </center>
+                    </div>
+                    <div class="card-body">
+                        <center>
+                        <h3>منتجات تم إختيارها</h3>
+                        {% for stuff_product in cart_products %}
+                            {{ stuff_product.name}}
+                            
+                            {% if stuff_product.is_sale %}
+                                {{stuff_product.sale_price}}
+                            {% else %}
+                                {{ stuff_product.price}}
+                            {% endif %}
+
+                            Quantity:
+                            {% for key,value in cart_quantity.items %}
+                                {% if key ==  stuff_product.id|slugify%}
+                                    {{value}}
+                                {% endif %}
+                            {% endfor %}
+                            <br>
+                        {% endfor %}
+
+                        <h3>المجموع</h3>
+                        {{cart_total}}
+                        </center>
+                    </div>
+                </div>
+
+           </div>  
     </div>
 </div>
+<br><br><br>
 
 
 
