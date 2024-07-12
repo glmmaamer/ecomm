@@ -2,8 +2,8 @@ from django import forms
 from .models import ShippingAddress
 
 class ShippingForm(forms.ModelForm):
-    Shipping_full_name = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control','placeholder': 'Full name'}),required=False)
-    Shipping_email =forms.EmailField(label="", widget=forms.TextInput(attrs={'class':'form-control','placeholder': '  Email'}),required=False)
+    shipping_full_name = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control','placeholder': 'Full name'}),required=False)
+    shipping_email =forms.EmailField(label="", widget=forms.TextInput(attrs={'class':'form-control','placeholder': 'Email'}),required=False)
     shipping_address1 = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control','placeholder': 'Address 1'}),required=True)
     shipping_address2 = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control','placeholder': 'Address 2'}),required=True)
     shipping_city = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control','placeholder': 'City'}),required=True)
