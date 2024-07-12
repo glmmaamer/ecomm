@@ -5,8 +5,8 @@
 <header class="bg-dark py-5">
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">  إرسال فاتورة الشراء  </h1>
-            <p class="lead fw-normal text-white-50 mb-0"> طلب منتجات و إرسال فاتورة الشراء و معلومات الشحن </p>
+            <h1 class="display-4 fw-bolder">    معالجة الطلب  </h1>
+            <p class="lead fw-normal text-white-50 mb-0"> معالجة الطلب </p>
         </div>
     </div>
 </header>
@@ -90,7 +90,7 @@
                     </div>
                     <div class="card-body">
                         <form  method="POST" action="{% url 'process_order' %}">
-                            {% csrf_token %}
+                            {% crsf_token %}
                             {{billing_form.as_p}}
                         
                             <center> <a href="{% url 'checkout' %}" class="btn btn-outline-secondary">  ادفع الأن  </a></center>

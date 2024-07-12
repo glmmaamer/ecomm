@@ -72,11 +72,10 @@
                         <form method="POST" action="{% url 'billing_info' %}">
                             {% csrf_token %}
                         {{ shipping_form.as_p }}
-                        
                     </div>
                 </div>
                     <br><br>
-                    <center><button type="submit" class="btn btn-secondary">إرسال معلومات الفاتورة و الشحن</button></center>
+                    <center><button type="submit" class="btn btn-outline-success">إرسال معلومات الفاتورة و الشحن</button></center>
                     </form>
            </div>  
     </div>

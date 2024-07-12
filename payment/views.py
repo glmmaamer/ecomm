@@ -7,7 +7,6 @@ from django.contrib import messages
 # Create your views here.
 
 def payment_success(request):
-    
     return render(request, "payment/payment.html")
 
 def checkout(request):
@@ -37,6 +36,8 @@ def billin_info(request):
         products = cart.get_prods
         quantity = cart.get_quantites
         totales = cart.cart_total()
+        my_billing = request.POST
+        request.session['my_billing'] = my_billing
         if request.user.is_authenticated:
             billing_form = PaymentForm()
             return render(request, 'payment/billing_info.html',{'cart_products':products,
@@ -58,10 +59,22 @@ def billin_info(request):
         return render(request, 'payment/billing_info.html',{'cart_products':products,
                                                             'cart_quantity':quantity,
                                                             'cart_total':totales,
-                                                            'shipping_form':shipping_form
+                                                            'shipping_form':shipping_form,
                                                             })
 
             
     else:
         messages.success(request,('تم إرسال الطلب'))
         return redirect('home')
+    
+def process_order(request):
+    if request.POST:
+        payment_form = PaymentForm(request.POST or None)
+        my_billing = request.session.get('my_billing')
+        messages.success(request,('يتم  معالجة الطلب'))
+        return redirect('home')
+
+    else:
+        messages.success(request,('لم يتم إرسال الطلب'))
+        return redirect('home')
+    
