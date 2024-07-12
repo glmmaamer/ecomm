@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from cart.cart import Cart
-from .forms import ShippingForm
+from .forms import ShippingForm, PaymentForm
 from .models import ShippingAddress
 from django.contrib import messages
 
@@ -21,7 +21,7 @@ def checkout(request):
         return render(request,'payment/checkout.html',{'cart_products':products,
                                                     'cart_quantity':quantity,
                                                     'cart_total':totales,
-                                                    'shipping_form':shipping_form
+                                                    'shipping_form':shipping_form,
                                                     })
     else:
         shipping_form = ShippingForm(request.POST or None)
@@ -38,13 +38,21 @@ def billin_info(request):
         quantity = cart.get_quantites
         totales = cart.cart_total()
         if request.user.is_authenticated:
+            billing_form = PaymentForm()
             return render(request, 'payment/billing_info.html',{'cart_products':products,
                                                                 'cart_quantity':quantity,
                                                                 'cart_total':totales,
-                                                                'shipping_info':request.POST
+                                                                'shipping_info':request.POST,
+                                                                'billing_form':billing_form
                                                                 })
         else:
-            pass
+            billing_form = PaymentForm()
+            return render(request, 'payment/billing_info.html',{'cart_products':products,
+                                                                'cart_quantity':quantity,
+                                                                'cart_total':totales,
+                                                                'shipping_info':request.POST,
+                                                                'billing_form':billing_form
+                                                                })
 
         shipping_form = request.POST
         return render(request, 'payment/billing_info.html',{'cart_products':products,

@@ -82,7 +82,19 @@
                       <center> <a href="{% url 'checkout' %}" class="btn btn-outline-secondary">تعديل بيانات من جديد</a></center>
                         
                     </div>
-                </div>                    
+                </div>      
+                <br><br>
+                <div class="card">
+                    <div class="card-header">
+                      <center><strong>معلومات البطاقة</strong></center>
+                    </div>
+                    <div class="card-body">
+                        {{billing_form.as_p}}
+                      
+                      <center> <a href="{% url 'checkout' %}" class="btn btn-outline-secondary">  ادفع الأن  </a></center>
+                        
+                    </div>
+                </div>                  
            </div>  
     </div>
 </div>
