@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from cart.cart import Cart
 from .forms import ShippingForm
 from .models import ShippingAddress
+from django.contrib import messages
 
 # Create your views here.
 
@@ -29,3 +30,30 @@ def checkout(request):
                                                         'cart_total':totales,
                                                         'shipping_form':shipping_form
                                                         })
+
+def billin_info(request):
+    if request.POST:
+        cart = Cart(request)
+        products = cart.get_prods
+        quantity = cart.get_quantites
+        totales = cart.cart_total()
+        if request.user.is_authenticated:
+            return render(request, 'payment/billing_info.html',{'cart_products':products,
+                                                                'cart_quantity':quantity,
+                                                                'cart_total':totales,
+                                                                'shipping_info':request.POST
+                                                                })
+        else:
+            pass
+
+        shipping_form = request.POST
+        return render(request, 'payment/billing_info.html',{'cart_products':products,
+                                                            'cart_quantity':quantity,
+                                                            'cart_total':totales,
+                                                            'shipping_form':shipping_form
+                                                            })
+
+            
+    else:
+        messages.success(request,('تم إرسال الطلب'))
+        return redirect('home')
