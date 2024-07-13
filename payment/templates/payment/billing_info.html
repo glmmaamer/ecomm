@@ -93,7 +93,8 @@
                             {% csrf_token %}
                             {{billing_form.as_p}}
                         
-                            <center> <a href="{% url 'checkout' %}" class="btn btn-outline-secondary">  ادفع الأن  </a></center>
+                            <center><button type="submit" class="btn btn-outline-success" > معالجة الطلب</button></center>
+
                         </form>
                     </div>
                 </div>                  

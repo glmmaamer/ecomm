@@ -20,7 +20,7 @@ class ShippingForm(forms.ModelForm):
 class PaymentForm(forms.Form):
     card_name = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control','placeholder': 'الاسم على البطاقة'}),required=False)
     card_number = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control','placeholder': ' رقم البطاقة '}),required=False)
-    card_exp_date = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control','placeholder': 'تاريخ إنتهاء البطاقة'}),required=False)
+    card_exp_date = forms.DateField(label="", widget=forms.TextInput(attrs={'class':'form-control','placeholder': 'تاريخ إنتهاء البطاقة'}),required=False)
     card_cvv_number = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control','placeholder': 'رقم الكود الموجود على بطاقات الاتمان'}),required=False)
     card_address1 = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control','placeholder': 'عنوان البطاقة الاول'}),required=False)
     card_address2 = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control','placeholder': 'عنوان البطاقة الثاني'}),required=False)

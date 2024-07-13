@@ -71,10 +71,11 @@ def process_order(request):
     if request.POST:
         payment_form = PaymentForm(request.POST or None)
         my_billing = request.session.get('my_billing')
-        messages.success(request,('يتم  معالجة الطلب'))
+        print(my_billing)
+        messages.success(request,'يتم  معالجة الطلب')
         return redirect('home')
 
     else:
-        messages.success(request,('لم يتم إرسال الطلب'))
+        messages.success(request,'لم يتم إرسال الطلب')
         return redirect('home')
     
