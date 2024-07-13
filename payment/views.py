@@ -4,6 +4,7 @@ from .forms import ShippingForm, PaymentForm
 from .models import ShippingAddress, Order, OrderItem
 from django.contrib.auth.models import User
 from django.contrib import messages
+from store.models import Product
 
 
 # Create your views here.
@@ -87,11 +88,37 @@ def process_order(request):
             user = request.user
             create_order = Order(user=user, full_name=full_name, email=email, shipping_address=shipping_address, amount_paid=amount_paid)
             create_order.save()
+            order_id = create_order.pk
+            for product in products():
+                product_id = product.id
+                if product.is_sale:
+                    price = product.is_sale
+                else:
+                    price = product.price
+
+                for key, value in quantity().items():
+                    if int(key) == product.id:
+                        create_order_item = OrderItem(order_id=order_id ,product_id=product_id ,user=user, quantity=value, price=price)
+                        create_order_item.save()
+
             messages.success(request,'يتم  معالجة الطلب')
             return redirect('home')
         else:
             create_order = Order( full_name=full_name, email=email, shipping_address=shipping_address, amount_paid=amount_paid)
             create_order.save()
+            order_id = create_order.pk
+            for product in products():
+                product_id = product.id
+                if product.is_sale:
+                    price = product.is_sale
+                else:
+                    price = product.price
+
+                for key, value in quantity().items():
+                    if int(key) == product.id:
+                        create_order_item = OrderItem(order_id=order_id ,product_id=product_id , quantity=value, price=price)
+                        create_order_item.save()
+                        
             messages.success(request,'يتم  معالجة الطلب')
             return redirect('home')
 
