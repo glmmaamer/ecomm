@@ -151,3 +151,13 @@ def not_shipped(request):
     else:
         messages.success(request,'تم رفض')
         return redirect('home')
+
+def orders(request,pk):
+    if request.user.is_authenticated and request.user.is_superuser:
+        order = Order.objects.get(id=pk)
+        items = OrderItem.objects.filter(order=pk)
+        return render(request, 'payment/orders.html', {'order':order, 'items':items})
+    else:
+        
+        messages.success(request,'تم رفض')
+        return redirect('home')

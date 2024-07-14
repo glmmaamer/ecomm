@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<center>
+<div class="container">
+    <div class="row">
+            <div class="col-8">
+                <br><br><br>
+                <div class="card text-center">
+                    <div class="card-header">
+                        {{order.full_name}}
+                    </div>
+                    <div class="card-body">
+                        Email: {{order.email}}<br>
+
+                        {% if order.shipped %}
+                         تاريخ قبول الطلب {{order.date_shipped}}<br>
+                         تاريخ ارسال الطلب{{order.date_order}}<br>
+                        {% else %}
+                        تاريخ ارسال الطلب{{order.date_order}}<br>
+                        {% endif %}
+                        <pre>
+                         {{order.shipping_address}}<br>
+                        </pre>
+                    </div>
+                        {% for item in items %}
+                          <h5> <h4>المنتج</h4> :{{item.product}} - <h4>السعر</h4>:{{item.price}}- <h4>العدد</h4>:{{item.quantity}}</h5>
+                        {% endfor %}
+                    </div>
+                  </div>
+
+            </div>
+    </div>
+</div>
+</center>
+<br><br><br><br><br>
+
+{% endblock %}
