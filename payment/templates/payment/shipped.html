@@ -1,12 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% if messages %}
+{% for messages in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{messages}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+{% endfor %}
+{% endif %}
 <center>
 <div class="container">
     <div class="row">
             <div class="col-8">
                 <br><br><br>
-         
+              <h2>الطلبات المقبولة</h2>
+              <br>
                 <table class="table table-striped">
                     <thead class="table-dark">
                       <tr>

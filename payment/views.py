@@ -5,6 +5,7 @@ from .models import ShippingAddress, Order, OrderItem
 from django.contrib.auth.models import User
 from django.contrib import messages
 from store.models import Product
+import datetime
 
 
 # Create your views here.
@@ -156,8 +157,25 @@ def orders(request,pk):
     if request.user.is_authenticated and request.user.is_superuser:
         order = Order.objects.get(id=pk)
         items = OrderItem.objects.filter(order=pk)
+        if request.POST:
+            status = request.POST['shipped_status']
+            if status == "true":
+                order = Order.objects.filter(id=pk)
+                now_date = datetime.datetime.now()
+                order.update(shipped=True, date_shipped=now_date)
+                messages.success(request, '  تم قبول الطلب و إضافته الى قائمة طلبات مقبولة ')
+                return redirect('shipped')
+                
+                
+             
+            else:
+                order = Order.objects.filter(id=pk)
+                order.update(shipped=False)
+                messages.success(request, 'تم إضافة الطلب الي قائمة طلبات المعلقة')
+                return redirect('not_shipped')
+               
+               
+                
         return render(request, 'payment/orders.html', {'order':order, 'items':items})
-    else:
-        
-        messages.success(request,'تم رفض')
-        return redirect('home')
+
+      

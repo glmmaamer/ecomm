@@ -98,7 +98,7 @@ def update_info(request):
         #get info models profile
         current_info = Profile.objects.get(user__id=request.user.id)
         #get info models payment
-        shipping_user = ShippingAddress.objects.get(user__id=request.user.id)
+        shipping_user = ShippingAddress.objects.get(user__id=request.user.id )
         #get form profile
         form = UserInfoForm(request.POST or None, instance=current_info)
         #get form payment

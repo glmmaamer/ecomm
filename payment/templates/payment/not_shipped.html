@@ -2,13 +2,25 @@
 
 {% block content %}
 
+{% if messages %}
+{% for messages in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{messages}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+{% endfor %}
+{% endif %}
+
 <div class="container">
     <div class="row">
         <center>
             <div class="col-8">
+              <br><br><br>
                 
                 <table class="table table-striped">
-                    <thead>
+                  <h2>الطلبات المعلقة</h2>
+                    <thead class="table-dark">
                       <tr>
                         <th scope="col">الطلب</th>
                         <th scope="col"> إيمايل الزبون</th>
@@ -19,7 +31,7 @@
                     {% for order in orders %}
                     <tbody>
                       <tr>
-                        <td><a href="{% url 'orders' %}">{{order.id}}</a></td>
+                        <td><a href="{% url 'orders' order.id %}">{{order.id}}</a></td>
                         <td>{{order.email}}</td>
                         <td>{{order.date_order}}</td>
                         <td>{{order.amount_paid}}</td>
