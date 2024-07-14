@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<center>
+<div class="container">
+    <div class="row">
+            <div class="col-8">
+                <br><br><br>
+         
+                <table class="table table-striped">
+                    <thead class="table-dark">
+                      <tr>
+                        <th scope="col">الطلب</th>
+                        <th scope="col"> إيمايل الزبون</th>
+                        <th scope="col"> تاريخ الطلب</th>
+                        <th scope="col">سعر الطلب</th>
+                      </tr>
+                    </thead>
+                   
+                    <tbody>
+                        {% for order in orders %}
+                            <tr>
+                                <td>{{order.id}}</td>
+                                <td>{{order.email}}</td>
+                                <td>{{order.date_shipped}}</td>
+                                <td>{{order.amount_paid}}</td>
+                            </tr>
+                         {% endfor %}
+                    </tbody>
+                   
+                  </table>
+
+            </div>
+    </div>
+</div>
+</center>
+
+{% endblock %}

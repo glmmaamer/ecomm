@@ -134,3 +134,20 @@ def process_order(request):
         messages.success(request,'لم يتم إرسال الطلب')
         return redirect('home')
     
+
+def shipped(request):
+    if request.user.is_authenticated and request.user.is_superuser:
+        orders = Order.objects.filter(shipped=True)
+        return render(request, 'payment/shipped.html', {'orders':orders})
+    else:
+        messages.success(request, ('تم الرفض'))
+        return redirect('home')
+
+
+def not_shipped(request):
+    if request.user.is_authenticated and request.user.is_superuser:
+        orders = Order.objects.filter(shipped=False)
+        return render(request, 'payment/not_shipped.html', {'orders': orders})
+    else:
+        messages.success(request,'تم رفض')
+        return redirect('home')
