@@ -4,7 +4,7 @@ from .forms import ShippingForm, PaymentForm
 from .models import ShippingAddress, Order, OrderItem
 from django.contrib.auth.models import User
 from django.contrib import messages
-from store.models import Product
+from store.models import Product, Profile
 import datetime
 
 
@@ -104,6 +104,8 @@ def process_order(request):
             for key in list(request.session.keys()):
                 if key == "session_key":
                     del request.session[key]
+            current_user = Profile.objects.filter(user__id=request.user.id)
+            current_user.update(cart_old="")
 
             messages.success(request,'يتم  معالجة الطلب')
             return redirect('home')
@@ -139,6 +141,14 @@ def process_order(request):
 def shipped(request):
     if request.user.is_authenticated and request.user.is_superuser:
         orders = Order.objects.filter(shipped=True)
+        if request.POST:
+            status = request.POST['shipped_status']
+            num = request.POST['num']
+            now_date = datetime.datetime.now()
+            order = Order.objects.filter(id=num)
+            order.update(shipped=False , date_shipped=now_date)
+            messages.success(request, '  تم قبول الطلب و إضافته الى قائمة طلبات مقبولة ')
+            return redirect('shipped')
         return render(request, 'payment/shipped.html', {'orders':orders})
     else:
         messages.success(request, ('تم الرفض'))
@@ -148,6 +158,14 @@ def shipped(request):
 def not_shipped(request):
     if request.user.is_authenticated and request.user.is_superuser:
         orders = Order.objects.filter(shipped=False)
+        if request.POST:
+            status = request.POST['shipped_status']
+            num = request.POST['num']
+            now_date = datetime.datetime.now()
+            order = Order.objects.filter(id=num)
+            order.update(shipped=True,date_shipped=now_date )
+            messages.success(request, '  تم قبول الطلب و إضافته الى قائمة طلبات مقبولة ')
+            return redirect('not_shipped')
         return render(request, 'payment/not_shipped.html', {'orders': orders})
     else:
         messages.success(request,'تم رفض')
@@ -165,17 +183,11 @@ def orders(request,pk):
                 order.update(shipped=True, date_shipped=now_date)
                 messages.success(request, '  تم قبول الطلب و إضافته الى قائمة طلبات مقبولة ')
                 return redirect('shipped')
-                
-                
-             
             else:
-                order = Order.objects.filter(id=pk)
+                order = Order.objects.filter(id=pk) 
                 order.update(shipped=False)
-                messages.success(request, 'تم إضافة الطلب الي قائمة طلبات المعلقة')
+                messages.success(request, 'تم رفض الطلب ')
                 return redirect('not_shipped')
-               
-               
-                
         return render(request, 'payment/orders.html', {'order':order, 'items':items})
 
       

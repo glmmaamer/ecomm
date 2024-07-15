@@ -10,20 +10,21 @@
 
 {% endfor %}
 {% endif %}
-<center>
+
 <div class="container">
     <div class="row">
-            <div class="col-8">
+            <div class="col-12">
                 <br><br><br>
-              <h2>الطلبات المقبولة</h2>
+              <center> <h2>الطلبات المقبولة</h2></center>
               <br>
                 <table class="table table-striped">
                     <thead class="table-dark">
                       <tr>
-                        <th scope="col">الطلب</th>
+                        <th scope="col">رقم الطلب</th>
                         <th scope="col"> إيمايل الزبون</th>
-                        <th scope="col"> تاريخ الطلب</th>
                         <th scope="col">سعر الطلب</th>
+                        <th scope="col">تاريخ قبول الطلب</th>
+                        <th scope="col">زر التحكم</th>
                       </tr>
                     </thead>
                    
@@ -32,8 +33,17 @@
                             <tr>
                                 <td><a href="{% url 'orders' order.id %}">{{order.id}}</a></td>
                                 <td>{{order.email}}</td>
-                                <td>{{order.date_shipped}}</td>
                                 <td>{{order.amount_paid}}</td>
+                                <td>{{order.date_shipped}}</td>
+                                <td>
+                                  <form method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="shipped_status" value="false">
+                                    <input type="hidden" name="num" value="{{order.id}}">
+                                    <button type="submit" class="btn btn-danger"  >رفض الطلب</button>
+        
+                                  </form>
+                                </td>
                             </tr>
                          {% endfor %}
                     </tbody>
