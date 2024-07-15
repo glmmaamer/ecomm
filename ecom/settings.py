@@ -12,12 +12,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
-from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-load_dotenv()
 
 
 # Quick-start development settings - unsuitable for production
@@ -29,8 +27,7 @@ SECRET_KEY = 'django-insecure-6@cp(%6zup_aac0dq=e&p0v9aikipib&29m3=7yi!ss!xi$m0_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ecomm-production-dea8.up.railway.app','https://ecomm-production-dea8.up.railway.app']
-CSRF_TRUSTED_ORIGINS = ['ecomm-production-dea8.up.railway.app','https://ecomm-production-dea8.up.railway.app']
+ALLOWED_HOSTS = ['.vercel.app']
 
 
 # Application definition
@@ -137,13 +134,12 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
-
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATIC_URL = 'static/'
 STATICFILES_DIRS = ['static/']
 
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
