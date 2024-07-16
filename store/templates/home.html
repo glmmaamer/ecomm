@@ -11,15 +11,35 @@
 
 {% endfor %}
 {% endif %}
+<br>
 
-<header class="bg-dark py-5">
-    <div class="container px-4 px-lg-5 my-5">
-        <div class="text-center text-white">
-            <h2 class="display-4 fw-bolder">مرحبا في متجرنا الالكتروني</h2>
-            <p class="lead fw-normal text-white-50 mb-0">موقعنا لتسويق المنتجات الاكترونية والملابس و الاكسسوارات ويوفر لكم التوصيل  </p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3 ">
+            <div class="border p-4 mb-4">
+                <form method="POST" action="{% url 'search' %}" class="d-flex" role="search">           
+                    {% csrf_token %}
+                        <input type="text" class="form-control" placeholder="search" name="searched">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+            <div class="border p-2 mb-4">
+                <div>
+                <form class="d-flex">
+                    <a type="submit" class="btn btn-outline-dark" href="{% url 'summary' %}">
+                    <i class="bi-cart-fill me-1"></i>
+                    <span class="badge bg-dark text-white ms-1 rounded-pill" id="cart_quantity">{{ cart|length }}</span>
+                    </a>
+                </form>
+                </div>
+                
+            </div>
+           
         </div>
     </div>
-</header>
+</div>
+<br>
+
 
      
         <!-- Section-->
@@ -54,7 +74,9 @@
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'product' product.id %}"> التفاصيل </a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'product' product.id %}">
+                                    <i class="bi bi-eye-fill"></i>
+                                </a></div>
                             </div>
                         </div>
                     </div>
@@ -78,7 +100,7 @@
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                 <div class="text-center"><a class="btn btn-outline-success mt-auto" href="{% url 'product' product.id %}">
-                                    التفاصيل
+                                    <i class="bi bi-eye-fill"></i>
                                 </a></div>
                             </div>
                         </div>
