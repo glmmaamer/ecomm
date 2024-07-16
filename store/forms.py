@@ -7,7 +7,6 @@ from .models import Profile, User
 #info user profile
 
 class UserInfoForm(forms.ModelForm):
-	phone = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control','placeholder': 'phone'}),required=False)
 	address1 = forms.CharField(label="",widget=forms.TextInput(attrs={'class':'form-control','placeholder':'address1'}),required=False)
 	address2 = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control','placeholder': 'address2'}),required=False)
 	city = forms.CharField(label="",widget=forms.TextInput(attrs={'class':'form-control','placeholder':'city'}),required=False)

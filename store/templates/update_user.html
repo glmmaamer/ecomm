@@ -5,22 +5,20 @@
 {% block content %}
 {% load crispy_forms_tags %}
 
+{% if messages %}
+{% for messages in messages %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    {{messages}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
 
-<header class="bg-dark py-5">
-    <div class="container px-4 px-lg-5 my-5">
-        <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder"> ملف الشخصي</h1>
-            <p class="lead fw-normal text-white-50 mb-0">تعديل ملفك الشخصي</p>
-        </div>
-    </div>
-</header>
+{% endfor %}
+{% endif %}
+<br>
 
-<br>
-<br>
-<div class="container">
     <div class="row"> 
         <div class="col-md-6 offset-md-3 ">
-            <div class="border p-4 mb-4">
+            <div class="border p-4 mb-4 bg-dark">
                 <center>
                 <h2>ملف الشخصي</h2>
                 </center>
@@ -33,13 +31,32 @@
                     <center>
                     <button type="submit" class="btn btn-primary">تعديل </button>
                     </center>
+                    <br><br>
+                 
                 </form>
-                <br>
-                <br>
                 <center>
                     <a href="{% url 'update_password' %}" class="btn btn-secondary">تعديل كلمة السر</a>
                 </center>
             </div>
+            <div class="border p-4 mb-4 bg-dark" >
+                <form method="POST" action="{% url 'update_user' %}">
+                    
+                    {% csrf_token %}
+                    <center><h2>معلومات الشحن</h2></center> 
+                    <br><br>
+                    {{shipping_form.as_p}}
+                    
+                    <br><br>
+                    <center>
+                    <button type="submit" class="btn btn-primary">تعديل أوإضافة بيانات توصيل عند شراء  </button>
+                    </center>
+
+                 
+                 
+                </form>
+            </div>
+
+                
         </div>
        
     </div>

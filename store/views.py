@@ -92,27 +92,6 @@ def login_user(request):
     else:
         return render(request, 'login.html')
     
-
-def update_info(request):
-    if request.user.is_authenticated:
-        #get info models profile
-        current_info = Profile.objects.get(user__id=request.user.id)
-        #get info models payment
-        shipping_user = ShippingAddress.objects.get(user__id=request.user.id )
-        #get form profile
-        form = UserInfoForm(request.POST or None, instance=current_info)
-        #get form payment
-        shipping_form = ShippingForm(request.POST or None, instance=shipping_user)
-        if form.is_valid() or shipping_form.is_valid():
-            form.save()
-            shipping_form.save()
-            messages.success(request, ('تمت إضافة و تعديل جميع بياناتك '))
-            return redirect('home')
-        return render(request, 'update_info.html',{'form':form, 'shipping_form':shipping_form})
-    else:
-        messages.success(request, ('هناك خطأفي أضافة أو تعديل بيانات توصيل عند الشراء يرجى إعادة المحاولة'))
-        return redirect('home')
-
 def update_user(request):
     if request.user.is_authenticated:
         current_user = User.objects.get(id=request.user.id)
@@ -120,12 +99,19 @@ def update_user(request):
         if update_form.is_valid():
             update_form.save()
             login(request, current_user)
-            messages.success(request,('تم تحديث ملفك الشخصي'))
+            messages.success(request, 'تم تعديل بيانات ملفك الشخصي')
+        shipping_user = ShippingAddress.objects.get(user__id=request.user.id )
+        shipping_form = ShippingForm(request.POST or None, instance=shipping_user)
+        if shipping_form.is_valid():
+            shipping_form.save()
+            messages.success(request,('تم تحديث بيانات الشحن'))
             return redirect('home')
-        return render(request, 'update_user.html', {'update_form':update_form})
+        return render(request,'update_user.html',{'update_form':update_form, 'shipping_form':shipping_form})
     else:
         messages.success(request, ('لم يتم تحديث ملفك الشخصي هناك خطأ'))
         return redirect('home')
+    #update info
+
 
 def update_password(request):
     if request.user.is_authenticated:
