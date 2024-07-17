@@ -11,40 +11,41 @@
 
 {% endfor %}
 {% endif %}
-<br>
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 offset-md-3 ">
-            <div class="border p-4 mb-4">
-                <form method="POST" action="{% url 'search' %}" class="d-flex" role="search">           
-                    {% csrf_token %}
-                        <input type="text" class="form-control" placeholder="search" name="searched">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-            </div>
-            <div class="border p-2 mb-4">
-                <div>
-                <form class="d-flex">
-                    <a type="submit" class="btn btn-outline-dark" href="{% url 'summary' %}">
-                    <i class="bi-cart-fill me-1"></i>
-                    <span class="badge bg-dark text-white ms-1 rounded-pill" id="cart_quantity">{{ cart|length }}</span>
-                    </a>
-                </form>
-                </div>
-                
-            </div>
-           
+<header id = "header" class = "vh-100 carousel slide" data-bs-ride = "carousel" style = "padding-top: 104px; background: url({% static 'image/packground.png' %});">
+    <div class = "container h-100 d-flex align-items-center carousel-inner">
+        <div class = "text-center carousel-item active">
+            <h2 class = "text-uppercacse text-white">best collection</h2>
+            <h1 class = "text-uppercase py-2 fw-bold text-white">new arrivals</h1>
+            <a href = "#" class = "btn mt-3 text-light">shop now</a>
         </div>
+        <div class = "text-center carousel-item">
+            <h2 class = "text-capitalize text-white">best price & offer</h2>
+            <h1 class = "text-uppercase py-2 fw-bold text-light">new season</h1>
+            <a href = "#" class = "btn mt-3 text-light">buy now</a>
+        </div>
+
+        <button class = "carousel-control-prev" type = "button" data-bs-target="#header" data-bs-slide = "prev">
+            <span class = "carousel-control-prev-icon"></span>
+        </button>
+        <button class = "carousel-control-next" type = "button" data-bs-target="#header" data-bs-slide = "next">
+            <span class = "carousel-control-next-icon"></span>
+        </button>
     </div>
-</div>
-<br>
+</header>
 
 
      
         <!-- Section-->
-        <section class="py-5">
+         <section id = "collection" class = "py-5">
             <div class="container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    <center>
+                        <div class = "d-flex flex-wrap justify-content-center mt-5 filter-button-group">
+                            <a href="{% url 'category_all' %}" class="btn m-2 text-dark active-filter-btn">Show All Category</a>
+                        </div>
+                    </center>
+                </div> <br>
+
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                     {% for product in product %}
                     {% if product.is_sale %}

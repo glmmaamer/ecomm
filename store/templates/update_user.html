@@ -5,20 +5,21 @@
 {% block content %}
 {% load crispy_forms_tags %}
 
+
 {% if messages %}
 {% for messages in messages %}
 <div class="alert alert-warning alert-dismissible fade show" role="alert">
     {{messages}}
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
-
 {% endfor %}
 {% endif %}
+
 <br>
 
     <div class="row"> 
         <div class="col-md-6 offset-md-3 ">
-            <div class="border p-4 mb-4 bg-dark">
+            <div class="border p-4 mb-4 ">
                 <center>
                 <h2>ملف الشخصي</h2>
                 </center>
@@ -29,36 +30,35 @@
                     {{ update_form.as_p }}
                     <br><br>
                     <center>
-                    <button type="submit" class="btn btn-primary">تعديل </button>
+                    <button type="submit" class="btn btn-outline-primary">تعديل </button>
                     </center>
                     <br><br>
                  
                 </form>
                 <center>
-                    <a href="{% url 'update_password' %}" class="btn btn-secondary">تعديل كلمة السر</a>
+                    <a href="{% url 'update_password' %}" class="btn btn-outline-secondary">تعديل كلمة السر</a>
                 </center>
             </div>
-            <div class="border p-4 mb-4 bg-dark" >
+            <div class="border p-4 mb-4 " >
                 <form method="POST" action="{% url 'update_user' %}">
                     
                     {% csrf_token %}
-                    <center><h2>معلومات الشحن</h2></center> 
+                    <center><h2 >معلومات الشحن</h2></center> 
                     <br><br>
                     {{shipping_form.as_p}}
-                    
                     <br><br>
                     <center>
-                    <button type="submit" class="btn btn-primary">تعديل أوإضافة بيانات توصيل عند شراء  </button>
+                    <button type="submit" class="btn btn-outline-primary">   تعديل بيانات الشحن  </button>
                     </center>
-
-                 
-                 
                 </form>
-            </div>
-
-                
+            </div>  
+            <center>
+                <a href="{% url 'logout' %}"> 
+                    <button type="submit" class="btn btn-outline-danger">تسجيل الخروج</button>
+                </a>
+            </center>
+            <br><br>
         </div>
-       
     </div>
 </div>
 

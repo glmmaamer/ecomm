@@ -1,72 +1,60 @@
-      <!-- Navigation-->
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container px-4 px-lg-5">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-            
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'home' %}">الرئيسية</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">عن</a></li>
 
-                  
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">الفئات</a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{% url 'category_all' %}">جميع الفئات</a></li>
-                            <li><hr class="dropdown-divider" /></li>
-                            <li><a class="dropdown-item" href="{% url 'category' 'electronic' %}">الكترونية</a></li>
-                            <li><a class="dropdown-item" href="{% url 'category' 'bags' %}">حقائب</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'search' %}"> بحث</a>
-                    </li>
-                    {% if user.is_superuser %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">الطلبات </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{% url 'shipped' %}"> طلبات مقبولة  </a></li>
-                            <li><hr class="dropdown-divider" /></li>
-                            <li><a class="dropdown-item" href="{% url 'not_shipped' %}">طلبات غير مقبولة  </a></li>
-                        </ul>
-                    </li>
-                    {% endif %}
-                    {% if user.is_authenticated %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-                                </svg>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{% url 'update_user' %}">بياناتك شخصية </a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout' %}">تسجيل الخروج</a>
-                    </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}">تسجيل دخول</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'signup' %}">إنشاء حساب</a>
-                    </li>
-                   
 
-                    {% endif %}
-                </ul>
-               
-                
-                <form class="d-flex">
-                    <a type="submit" class="btn btn-outline-dark" href="{% url 'summary' %}">
-                    <i class="bi-cart-fill me-1"></i>
-                    <span class="badge bg-dark text-white ms-1 rounded-pill" id="cart_quantity">{{ cart|length }}</span>
-                    </a>
-                </form>
-            </div>
+<!-- navbar -->
+<nav class = "navbar navbar-expand-lg navbar-light bg-white py-4 fixed-top">
+    <div class = "container">
+        <a class = "navbar-brand d-flex justify-content-between align-items-center order-lg-0" href = "index.html">
+            <img src = "images/shopping-bag-icon.png" alt = "site icon">
+            <span class = "text-uppercase fw-lighter ms-2">Attire</span>
+        </a>
+
+        <div class = "order-lg-2 nav-btns">
+            <form class="d-flex">
+                <a type="submit" class="btn btn-outline-dark" href="{% url 'summary' %}">
+                <i class="bi-cart-fill me-1"></i>
+                <span class="badge bg-dark text-white ms-1 rounded-pill" id="cart_quantity">{{ cart|length }}</span>
+                </a>
+            </form>
+          
         </div>
-       
-    </nav>
-    <!-- Header-->
+           
+        <button class = "navbar-toggler border-0" type = "button" data-bs-toggle = "collapse" data-bs-target = "#navMenu">
+            <span class = "navbar-toggler-icon"></span>
+        </button>
+
+        <div class = "collapse navbar-collapse order-lg-1" id = "navMenu">
+            <ul class = "navbar-nav mx-auto text-center">
+                <li class = "nav-item px-2 py-2">
+                    <a class = "nav-link text-uppercase text-dark" href = "{% url 'home' %}">home</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class = "nav-item px-2 py-2">
+                    <a class = "nav-link text-uppercase text-dark" href = "{% url 'update_user' %}">profile</a>
+                </li>
+                {% else %}
+
+                <li class = "nav-item px-2 py-2">
+                    <a class = "nav-link text-uppercase text-dark" href = "{% url 'login' %}">login</a>
+                </li>
+                <li class = "nav-item px-2 py-2">
+                    <a class = "nav-link text-uppercase text-dark" href = "{% url 'signup' %}">signup</a>
+                </li>
+                {% endif %}
+                <li class = "nav-item px-2 py-2">
+                    <a class = "nav-link text-uppercase text-dark" href = "#about">about us</a>
+                </li>
+                <li class = "nav-item px-2 py-2 border-0">
+                    <a class = "nav-link text-uppercase text-dark" href = "#popular">popular</a>
+                </li>
+                <li class="nav-item px-2 py-2">
+                    <a href="{% url 'search' %}" class="nav-link text-uppercase text-dark">
+                        <i class="bi bi-search"></i>
+                    </a>        
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- end of navbar -->
+
+<br><br><br><br>

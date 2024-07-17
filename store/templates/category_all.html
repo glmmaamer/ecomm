@@ -1,25 +1,28 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 
-<header class="bg-dark py-5">
+<header id = "header" class = "vh-100 carousel slide" data-bs-ride = "carousel" style = "padding-top: 104px;background: url({% static 'image/all_category.png' %}) ">
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">عرض جميع الفئات</h1>
-            <p class="lead fw-normal text-white-50 mb-0">إختار فئة منتوج الذي تريد شرائة</p>
+            <h1 class="display-4 fw-bolder">سلة التسوق </h1>
+            <p class="lead fw-normal text-white-50 mb-0">سلة المنتوجات التي قمت بإختيارها </p>
         </div>
     </div>
 </header>
 <div class="container">
     <div class="row">
-        <center>
-            {% for category in all_category %}
-            <h1>
-                <a href="{% url 'category' category %}">{{category}}</a>
-            </h1>
-           {% endfor %}
-        </center>
+        <div class = "d-flex flex-wrap justify-content-center mt-5 filter-button-group">
 
+        <center>
+            <div class = "d-flex flex-wrap justify-content-center mt-5 filter-button-group">
+                {% for category in all_category %}
+                <a href="{% url 'category' category %}" class="btn m-2 text-dark" style="height:50px; width: 200px; background:url('{{category.background.image}}')">{{category}}</a>
+                {% endfor %}
+            </div>
+        </center>
+        </div>
       
     </div>
 </div>
