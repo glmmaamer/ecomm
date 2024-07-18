@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<br><br>
+{% if messages %}
+{% for messages in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{messages}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+{% endfor %}
+{% endif %}
+<br>
+<div class="container">
+    <div class="row">
+        <a href="{% url 'shipped' %}" class="btn btn-success">shipped</a>
+        <br><br>
+        <a href="{% url 'not_shipped' %}" class="btn btn-success">not shipped</a>
+
+    </div>
+</div>
+{% endblock %}

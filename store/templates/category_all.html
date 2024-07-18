@@ -18,7 +18,7 @@
         <center>
             <div class = "d-flex flex-wrap justify-content-center mt-5 filter-button-group">
                 {% for category in all_category %}
-                <a href="{% url 'category' category %}" class="btn m-2 text-dark" style="height:50px; width: 200px; background:url('{{category.background.image}}')">{{category}}</a>
+                <a href="{% url 'category' category %}" class="btns m-2 text-dark" style="height:50px; width: 200px; background:url('{{category.background.image}}')">{{category}}</a>
                 {% endfor %}
             </div>
         </center>

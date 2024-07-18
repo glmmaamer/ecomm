@@ -61,7 +61,7 @@ def Register_User(request):
             user = authenticate(username=username, password=password)
             login(request,user)
             messages.success(request,('تم إنشاء حساب بنجاح  '))
-            return redirect('update_info')
+            return redirect('update_user')
         else:
             messages.success(request, ('لم يتم إنشاء حساب يرجى إعادة المحاولة'))
             return redirect('home')
@@ -140,3 +140,5 @@ def logout_user(request):
     messages.success(request,("تم تسجيل الخروج "))
     return redirect('login')
 
+def deshpoard(request):
+    return render(request, 'payment/dashpord.html')

@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-<header class="bg-dark py-5">
+<header class="bg-dark py-5" style=" background: url({% static 'image/shepping.jpg' %});">
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
             <h1 class="display-4 fw-bolder">  إرسال فاتورة الشراء  </h1>
@@ -82,22 +82,15 @@
                       <center> <a href="{% url 'checkout' %}" class="btn btn-outline-secondary">تعديل بيانات من جديد</a></center>
                         
                     </div>
+                    <form method="POST" action="{% url 'billing_info' %}">
+                        {% csrf_token %}
+                    <center><button type="submit" class="btn btn-outline-success" name="shipped_status" > معالجة الطلب</button></center>
+
+                </form>
                 </div>      
                 <br><br>
-                <div class="card">
-                    <div class="card-header">
-                      <center><strong>معلومات البطاقة</strong></center>
-                    </div>
-                    <div class="card-body">
-                        <form  method="POST" action="{% url 'process_order' %}">
-                            {% csrf_token %}
-                            {{billing_form.as_p}}
-                        
-                            <center><button type="submit" class="btn btn-outline-success" > معالجة الطلب</button></center>
 
-                        </form>
-                    </div>
-                </div>                  
+               
            </div>  
     </div>
 </div>
