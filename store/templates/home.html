@@ -14,14 +14,15 @@
 <header id = "header" class = "vh-100 carousel slide" data-bs-ride = "carousel" style = "padding-top: 104px; background: url({% static 'image/packground.png' %});">
     <div class = "container h-100 d-flex align-items-center carousel-inner">
         <div class = "text-center carousel-item active">
-            <h2 class = "text-uppercacse text-white">best collection</h2>
-            <h1 class = "text-uppercase py-2 fw-bold text-white">new arrivals</h1>
-            <a href = "#" class = "btns mt-3 text-light">shop now</a>
+            <h1 class = "text-uppercase py-2 fw-bold text-white">موقعنا يوفر لك التوصيل مجاني</h1>
+            <br><br>
+            <a href = "#" class = "btns mt-3 text-light">اشتري الان</a>
         </div>
         <div class = "text-center carousel-item">
-            <h2 class = "text-capitalize text-white">best price & offer</h2>
-            <h1 class = "text-uppercase py-2 fw-bold text-light">new season</h1>
-            <a href = "#" class = "btns mt-3 text-light">buy now</a>
+            <h2 class = "text-capitalize text-white">عديد من التخفيضات</h2>
+            <h1 class = "text-uppercase py-2 fw-bold text-light">موقع جديد</h1>
+            <br><br>
+            <a href = "#" class = "btns mt-3 text-light">جميع الفئات</a>
         </div>
 
         <button class = "carousel-control-prev" type = "button" data-bs-target="#header" data-bs-slide = "prev">
@@ -41,7 +42,9 @@
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                     <center>
                         <div class = "d-flex flex-wrap justify-content-center mt-5 filter-button-group">
-                            <a href="{% url 'category_all' %}" class="btn m-2 text-dark active-filter-btn">Show All Category</a>
+                            <a href="{% url 'category_all' %}" class="btn m-2 text-dark active-filter-btn">
+                              جميع الفئات   
+                            </a>
                         </div>
                     </center>
                 </div> <br>
@@ -52,7 +55,7 @@
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- Sale badge-->
-                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">تخفيض</div>
                             <!-- Product image-->
                             <img class="card-img-top" src="{{ product.image.url}}" alt="..." />
                             <!-- Product details-->

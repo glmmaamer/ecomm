@@ -82,15 +82,13 @@
                       <center> <a href="{% url 'checkout' %}" class="btn btn-outline-secondary">تعديل بيانات من جديد</a></center>
                         
                     </div>
-                    <form method="POST" action="{% url 'billing_info' %}">
-                        {% csrf_token %}
-                    <center><button type="submit" class="btn btn-outline-success" name="shipped_status" > معالجة الطلب</button></center>
-
-                </form>
                 </div>      
                 <br><br>
+                <form method="POST" action="{% url 'process_order' %}">
+                {% csrf_token %}
+                <center><button type="submit" class="btn btn-outline-success" name="my_shipping" > معالجة الطلب</button></center>
 
-               
+                </form>
            </div>  
     </div>
 </div>

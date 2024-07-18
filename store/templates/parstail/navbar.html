@@ -25,26 +25,23 @@
         <div class = "collapse navbar-collapse order-lg-1" id = "navMenu">
             <ul class = "navbar-nav mx-auto text-center">
                 <li class = "nav-item px-2 py-2">
-                    <a class = "nav-link text-uppercase text-dark" href = "{% url 'home' %}">home</a>
+                    <a class = "nav-link text-uppercase text-dark" href = "{% url 'home' %}">الرئيسية</a>
                 </li>
                 {% if user.is_authenticated %}
                 <li class = "nav-item px-2 py-2">
-                    <a class = "nav-link text-uppercase text-dark" href = "{% url 'update_user' %}">profile</a>
+                    <a class = "nav-link text-uppercase text-dark" href = "{% url 'update_user' %}">ملف الشخصي</a>
                 </li>
                 {% else %}
 
                 <li class = "nav-item px-2 py-2">
-                    <a class = "nav-link text-uppercase text-dark" href = "{% url 'login' %}">login</a>
+                    <a class = "nav-link text-uppercase text-dark" href = "{% url 'login' %}">تسجيل الدخول</a>
                 </li>
                 <li class = "nav-item px-2 py-2">
-                    <a class = "nav-link text-uppercase text-dark" href = "{% url 'signup' %}">signup</a>
+                    <a class = "nav-link text-uppercase text-dark" href = "{% url 'signup' %}">أنشاء حساب</a>
                 </li>
                 {% endif %}
                 <li class = "nav-item px-2 py-2">
-                    <a class = "nav-link text-uppercase text-dark" href = "{% url 'about' %}">about us</a>
-                </li>
-                <li class = "nav-item px-2 py-2 border-0">
-                    <a class = "nav-link text-uppercase text-dark" href = "#popular">popular</a>
+                    <a class = "nav-link text-uppercase text-dark" href = "{% url 'about' %}">نبذة تعريفية</a>
                 </li>
                 <li class="nav-item px-2 py-2">
                     <a href="{% url 'search' %}" class="nav-link text-uppercase text-dark">
